@@ -1,14 +1,12 @@
-# setup aws terraform provider version to be used
 terraform {
   required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "5.6.2"
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.107.0"
     }
   }
 }
 
-# setup terraform aws provider to create resources in your desired aws region
-provider "aws" {
-  region = var.region
+provider "azurerm" {
+  features {}
 }

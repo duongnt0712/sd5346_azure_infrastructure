@@ -1,14 +1,10 @@
-output "cluster_certificate_authority_data" {
-  description = "Base64 encoded certificate data required to communicate with the cluster"
-  value       = module.eks.cluster_certificate_authority_data
+output "kube_config" {
+  description = "Raw Kubernetes config to be used by kubectl and other compatible tools."
+  value       = module.cluster.kube_config
+  sensitive   = true
 }
 
-output "cluster_endpoint" {
-  description = "Endpoint for your Kubernetes API server"
-  value       = module.eks.cluster_endpoint
-}
-
-output "cluster_oidc_issuer_url" {
-  description = "The URL on the EKS cluster for the OpenID Connect identity provider"
-  value       = module.eks.cluster_oidc_issuer_url
+output "oidc_issuer_url" {
+  description = "The OIDC issuer URL that is associated with the cluster"
+  value       = module.cluster.oidc_issuer_url
 }
