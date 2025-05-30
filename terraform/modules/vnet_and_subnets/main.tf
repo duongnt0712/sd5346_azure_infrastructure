@@ -26,7 +26,7 @@ resource "azurerm_network_interface" "main" {
   resource_group_name = azurerm_resource_group.az_rg.name
 
   ip_configuration {
-    name                          = "testconfiguration1"
+    name                          = "practical-devops-ip-configuration"
     subnet_id                     = azurerm_subnet.az_subnet.id
     private_ip_address_allocation = "Dynamic"
   }
