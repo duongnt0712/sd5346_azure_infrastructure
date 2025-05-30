@@ -4,7 +4,7 @@ trigger:
       - main
 
 pool:
-  name: BNDZ # Use your private agent pool
+  name: Practical-DevOps # Use your private agent pool
 
 variables:
   kubernetesServiceConnection: "aks-connection" # Replace with your actual service connection name

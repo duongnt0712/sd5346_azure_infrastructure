@@ -65,5 +65,5 @@ variable "additional_resource_group_tags" {
 variable "acr_name" {
   type        = string
   description = "The name of the Azure Container Registry. This is used to store container images."
-  default     = "bndzACR"
+  default     = "practical-devops-acr"
 }
