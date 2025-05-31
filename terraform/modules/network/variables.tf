@@ -13,7 +13,7 @@ variable "subnet_name" {
   description = "The name of the subnet. Changing this forces a new resource to be created."
 }
 
-variable "region" {
+variable "location" {
   type        = string
   description = "The location/region where the resource group. Changing this forces a new resource to be created. We will create the vnet and subnets in the same location/region where the resource group is."
 }
@@ -60,10 +60,4 @@ variable "additional_resource_group_tags" {
   type        = map(any)
   description = "additional tags for resource group"
   default     = {}
-}
-
-variable "acr_name" {
-  type        = string
-  description = "The name of the Azure Container Registry. This is used to store container images."
-  default     = "practical-devops-acr"
 }

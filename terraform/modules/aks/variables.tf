@@ -6,12 +6,12 @@ variable "cluster_name" {
 variable "k8s_version" {
   type        = string
   description = "kubernetes version"
-  default     = "1.26"
+  default     = "1.29"
 }
 
-variable "region" {
+variable "location" {
   type        = string
-  description = "azure region where the aks cluster must be created, this region should match where you have created the resource group, vnet and subnet"
+  description = "azure location/region where the aks cluster must be created, this location/region should match where you have created the resource group, vnet and subnet"
 }
 
 variable "resource_group_name" {
