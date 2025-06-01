@@ -8,11 +8,11 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   tags                = var.aks_tags
 
   default_node_pool {
-    name                         = "system"
-    node_count                   = 1
-    vm_size                      = "Standard_D2_v2"
-    zones                        = [1, 2, 3]
-    vnet_subnet_id               = var.az_subnet_id
+    name           = "system"
+    node_count     = 1
+    vm_size        = "Standard_B2s"
+    vnet_subnet_id = var.az_subnet_id
+
     only_critical_addons_enabled = true
 
     node_labels = {
@@ -31,6 +31,8 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   # enable workload identity
   oidc_issuer_enabled       = true
   workload_identity_enabled = true
+
+  depends_on = [var.az_subnet_dependency]
 }
 
 resource "azurerm_kubernetes_cluster_node_pool" "k8s-worker" {
@@ -41,7 +43,6 @@ resource "azurerm_kubernetes_cluster_node_pool" "k8s-worker" {
   vm_size               = each.value.vm_size
   min_count             = each.value.min_count
   max_count             = each.value.max_count
-  zones                 = each.value.zones
   vnet_subnet_id        = var.az_subnet_id
   tags                  = each.value.tags
 

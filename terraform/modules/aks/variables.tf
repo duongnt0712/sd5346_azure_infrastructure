@@ -6,7 +6,7 @@ variable "cluster_name" {
 variable "k8s_version" {
   type        = string
   description = "kubernetes version"
-  default     = "1.29"
+  default     = "1.32.4"
 }
 
 variable "location" {
@@ -30,6 +30,10 @@ variable "az_subnet_id" {
   description = "azure subnet id where the nodepools and aks cluster need to be created"
 }
 
+variable "az_subnet_dependency" {
+  description = "azure subnet id where the nodepools and aks cluster need to be created"
+}
+
 variable "network_plugin" {
   type        = string
   description = "Network plugin to use for networking. Currently supported values are azure, kubenet and none. Changing this forces a new resource to be created."
@@ -46,7 +50,6 @@ variable "nodepools" {
   description = "Nodepools for the Kubernetes cluster"
   type = map(object({
     name                  = string
-    zones                 = list(number)
     vm_size               = string
     min_count             = number
     max_count             = number
@@ -58,11 +61,10 @@ variable "nodepools" {
   default = {
     worker = {
       name                  = "worker"
-      zones                 = [1, 2, 3]
       vm_size               = "Standard_D2_v2"
-      min_count             = 1
-      max_count             = 100
-      enable_auto_scaling   = true
+      min_count             = null
+      max_count             = null
+      enable_auto_scaling   = false
       enable_node_public_ip = true
       tags                  = { worker_name = "worker" }
       node_labels           = { "worker-name" = "worker" }
