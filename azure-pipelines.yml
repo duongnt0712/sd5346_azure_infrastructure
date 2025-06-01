@@ -4,11 +4,11 @@ trigger:
       - main
 
 pool:
-  name: Practical-DevOps # Use your private agent pool
+  name: SD5346-practical-devops
 
 variables:
-  kubernetesServiceConnection: "aks-connection" # Replace with your actual service connection name
-  namespace: "default" # Change if using a custom namespace
+  kubernetesServiceConnection: "azure-infrastructure-connection"
+  namespace: "default"
 
 stages:
   - stage: Deploy
@@ -27,7 +27,7 @@ stages:
               namespace: $(namespace)
               command: apply
               useConfigurationFile: true
-              configuration: Manifest/mongodb.yaml
+              configuration: kubernetes/mongodb.yaml
 
           - task: Kubernetes@1
             displayName: Deploy Backend
@@ -37,7 +37,7 @@ stages:
               namespace: $(namespace)
               command: apply
               useConfigurationFile: true
-              configuration: Manifest/backend.yaml
+              configuration: kubernetes/backend.yaml
 
           - task: Kubernetes@1
             displayName: Deploy Frontend
@@ -47,7 +47,7 @@ stages:
               namespace: $(namespace)
               command: apply
               useConfigurationFile: true
-              configuration: Manifest/frontend.yaml
+              configuration: kubernetes/frontend.yaml
 
           - task: Kubernetes@1
             displayName: Deploy Ingress
@@ -57,4 +57,4 @@ stages:
               namespace: $(namespace)
               command: apply
               useConfigurationFile: true
-              configuration: Manifest/ingress.yaml
+              configuration: kubernetes/ingress.yaml
